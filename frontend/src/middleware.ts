@@ -1,12 +1,19 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-const isProtectedRoute = createRouteMatcher(['/chat(.*)']);
+// TEMPORARILY DISABLED - Add CLERK_SECRET_KEY to Netlify env vars, then uncomment
+// import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+// const isProtectedRoute = createRouteMatcher(['/chat(.*)']);
+// export default clerkMiddleware(async (auth, req) => {
+//     if (isProtectedRoute(req)) {
+//         await auth.protect();
+//     }
+// });
 
-export default clerkMiddleware(async (auth, req) => {
-    if (isProtectedRoute(req)) {
-        await auth.protect();
-    }
-});
+// Temporary passthrough middleware
+export function middleware(request: NextRequest) {
+    return NextResponse.next();
+}
 
 export const config = {
     matcher: [
