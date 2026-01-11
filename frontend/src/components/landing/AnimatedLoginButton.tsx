@@ -35,10 +35,10 @@ export function AnimatedLoginButton({ fullWidth = false, variant = "default", on
         // DON'T close the mobile menu - keep component mounted so overlay stays visible
         // The navigation will handle the cleanup
 
-        // Navigate after the slow animation is visible
+        // Navigate after a brief animation delay
         setTimeout(() => {
             router.push("/sign-in");
-        }, 1200);
+        }, 400);
     };
 
     // Render the overlay using portal - with loading spinner in center of viewport
@@ -71,7 +71,7 @@ export function AnimatedLoginButton({ fullWidth = false, variant = "default", on
                     opacity: 1
                 }}
                 transition={{
-                    duration: 2,
+                    duration: 0.6,
                     ease: "easeOut"
                 }}
             />
@@ -93,8 +93,8 @@ export function AnimatedLoginButton({ fullWidth = false, variant = "default", on
                 initial={{ opacity: 0 }}
                 animate={{ opacity: [0, 1, 1, 0] }}
                 transition={{
-                    duration: 1.2,
-                    times: [0, 0.15, 0.7, 1],
+                    duration: 0.5,
+                    times: [0, 0.2, 0.6, 1],
                     ease: "easeInOut"
                 }}
             >
