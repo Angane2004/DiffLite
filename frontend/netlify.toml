@@ -1,0 +1,14 @@
+[build]
+  command = "npm install && npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Next.js plugin for Netlify
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Environment variables for production
+# Note: Set NEXT_PUBLIC_API_URL in Netlify dashboard
+# Example value: https://edudiff-backend.onrender.com
