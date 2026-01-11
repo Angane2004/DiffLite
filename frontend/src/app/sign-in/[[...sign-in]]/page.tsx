@@ -390,29 +390,30 @@ export default function SignInPage() {
                         </div>
 
                         {/* Clerk SignIn */}
-                        <SignIn
-                            appearance={{
-                                elements: {
-                                    rootBox: "w-full",
-                                    card: "shadow-none bg-transparent p-0",
-                                    headerTitle: "hidden",
-                                    headerSubtitle: "hidden",
-                                    socialButtonsBlockButton: "bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all duration-150 shadow-sm",
-                                    socialButtonsBlockButtonText: "font-medium text-slate-700",
-                                    dividerLine: "bg-slate-200",
-                                    dividerText: "text-slate-400 text-sm",
-                                    formFieldLabel: "text-slate-700 font-medium text-sm",
-                                    formFieldInput: "rounded-lg border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-150 bg-white",
-                                    formButtonPrimary: "bg-indigo-600 hover:bg-indigo-700 rounded-lg font-medium shadow-sm transition-all duration-150",
-                                    footerActionLink: "text-indigo-600 hover:text-indigo-700 font-medium",
-                                    identityPreviewEditButton: "text-indigo-600",
-                                },
-                                layout: {
-                                    socialButtonsPlacement: "top",
-                                    showOptionalFields: false,
-                                },
-                            }}
-                        />
+                        <div className="min-h-[400px]">
+                            <SignIn
+                                fallbackRedirectUrl="/chat"
+                                appearance={{
+                                    elements: {
+                                        rootBox: "w-full",
+                                        card: "shadow-lg bg-white rounded-xl p-6",
+                                        socialButtonsBlockButton: "bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all duration-150 shadow-sm",
+                                        socialButtonsBlockButtonText: "font-medium text-slate-700",
+                                        dividerLine: "bg-slate-200",
+                                        dividerText: "text-slate-400 text-sm",
+                                        formFieldLabel: "text-slate-700 font-medium text-sm",
+                                        formFieldInput: "rounded-lg border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-150 bg-white",
+                                        formButtonPrimary: "bg-indigo-600 hover:bg-indigo-700 rounded-lg font-medium shadow-sm transition-all duration-150",
+                                        footerActionLink: "text-indigo-600 hover:text-indigo-700 font-medium",
+                                        identityPreviewEditButton: "text-indigo-600",
+                                    },
+                                    layout: {
+                                        socialButtonsPlacement: "top",
+                                        showOptionalFields: false,
+                                    },
+                                }}
+                            />
+                        </div>
 
                         {/* Footer */}
                         {/* <p className="text-center text-sm text-slate-500 mt-8">
