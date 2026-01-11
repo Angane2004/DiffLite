@@ -1,18 +1,31 @@
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-// TEMPORARILY DISABLED - Add CLERK_SECRET_KEY to Netlify env vars, then uncomment
-// import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-// const isProtectedRoute = createRouteMatcher(['/chat(.*)']);
-// export default clerkMiddleware(async (auth, req) => {
-//     if (isProtectedRoute(req)) {
-//         await auth.protect();
-//     }
-// });
+const isProtectedRoute = createRouteMatcher(['/chat(.*)']);
 
-// Temporary passthrough middleware
-export function middleware(request: NextRequest) {
-    return NextResponse.next();
+// Check if Clerk is properly configured
+const isClerkConfigured = () => {
+    return !!(
+        process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
+        process.env.CLERK_SECRET_KEY
+    );
+};
+
+// Production-ready middleware with graceful fallback
+export default function middleware(request: NextRequest) {
+    // If Clerk is not configured, allow all requests through
+    if (!isClerkConfigured()) {
+        console.warn('⚠️ Clerk not configured - authentication disabled');
+        return NextResponse.next();
+    }
+
+    // Use Clerk middleware when properly configured
+    return clerkMiddleware(async (auth, req) => {
+        if (isProtectedRoute(req)) {
+            await auth.protect();
+        }
+    })(request, {} as any);
 }
 
 export const config = {
@@ -23,3 +36,4 @@ export const config = {
         '/(api|trpc)(.*)',
     ],
 };
+
